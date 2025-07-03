@@ -13,14 +13,14 @@ import { LoggerService } from '../services/Logger/logger.services'
 
 interface Database {
   users: UserTable
-  user_addresses: UserAddressTable
+  userAddresses: UserAddressTable
   categories: CategoryTable
   products: ProductTable
-  product_images: ProductImageTable
+  productImages: ProductImageTable
   carts: CartTable
-  cart_items: CartItemTable
+  cartItems: CartItemTable
   orders: OrderTable
-  order_items: OrderItemTable
+  orderItems: OrderItemTable
   shops: ShopTable
 }
 

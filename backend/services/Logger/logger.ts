@@ -1,24 +1,18 @@
-import pino, { LoggerOptions } from "pino";
-import PinoHttp from "pino-http";
+import pino from "pino";
 import { ILogger } from "./logger.services";
+import { injectable } from "inversify";
 
-const config: LoggerOptions  = {
+const logger = pino({
 	transport: {
-		target: 'pino-pretty',
+		target: 'pino-pretty'
 	},
-}
-
-const logger = pino(config)
+})
 logger.info('Салам алейкум')
 
-export const httpLogger = PinoHttp(config)
-
-export default logger
-
-
+@injectable()
 export class PinoService implements ILogger {
   
-	log: ILogger['info'] = (data) => {
+	log: ILogger['log'] = (data) => {
 		logger.info(data)
 	}
 
@@ -26,3 +20,6 @@ export class PinoService implements ILogger {
 		logger.error(data)
 	}
 } 
+
+
+export default logger
