@@ -2,7 +2,7 @@ import { NextFunction, Response, Request, Router } from 'express';
 import { injectable } from 'inversify';
 import 'reflect-metadata';
 
-import { LoggerService } from '../services/Logger/logger.services'
+import { LoggerService } from '../services/Logger/loggerServices'
 
 
 export interface IControllerRoute {
@@ -23,11 +23,9 @@ const HTTP_STATUSES = {
 @injectable()
 export abstract class BaseController {
 	private readonly _router: Router;
-	public readonly basePath: string;
 
-	constructor(private logger: LoggerService, basePath:string) {
+	constructor(private logger: LoggerService) {
 		this._router = Router();
-		this.basePath = basePath;
 	}
 
 	get router(): Router {

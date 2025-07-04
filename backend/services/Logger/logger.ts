@@ -1,5 +1,5 @@
 import pino from "pino";
-import { ILogger } from "./logger.services";
+import { ILogger } from "./loggerServices";
 import { injectable } from "inversify";
 
 const logger = pino({

@@ -6,9 +6,9 @@ import * as path from 'path'
 
 import { inject, injectable } from 'inversify';
 import { TYPES } from '../inversify/types';
-import { ConfigService } from '../services/config.env';
+import { ConfigService } from '../services/ConfigService';
 import { CategoryTable, ProductTable, UserAddressTable, UserTable, ProductImageTable, CartTable, CartItemTable, OrderTable, OrderItemTable, ShopTable } from './Idb';
-import { LoggerService } from '../services/Logger/logger.services'
+import { LoggerService } from '../services/Logger/loggerServices'
 
 
 interface Database {
@@ -25,7 +25,7 @@ interface Database {
 }
 
 @injectable()
-export class DataBaseCreate{
+export class DataBaseUseCreate{
     private db: Kysely<Database>;
     private migrator: Migrator;
 
@@ -67,15 +67,15 @@ export class DataBaseCreate{
       const { error, results } = await this.migrator.migrateToLatest();
       
       if (error) {
-        this.logger.error(`Migration failed: ${error}`);
+        this.logger.error(`Ошибка миграции: ${error}`);
         throw error;
       }
 
       results?.forEach((it) => {
         if (it.status === 'Success') {
-          this.logger.log(`Migration "${it.migrationName}" was executed successfully`);
+          this.logger.log(`Миграция "${it.migrationName}" прошла успешно`);
         } else if (it.status === 'Error') {
-          this.logger.log(`Failed to execute migration "${it.migrationName}"`);
+          this.logger.log(`Миграциия фейл "${it.migrationName}"`);
         }
       });
 

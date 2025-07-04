@@ -8,18 +8,29 @@
   "description": "",
   "dependencies": {
     "@types/pg": "^8.15.4",
+    "bcryptjs": "^3.0.2",
+    "connect-redis": "^9.0.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
+    "express-session": "^1.18.1",
+    "helmet": "^8.1.0",
     "inversify": "^7.5.3",
     "kysely": "^0.28.2",
     "pg": "^8.16.2",
     "pino": "^9.7.0",
     "pino-http": "^10.5.0",
+    "redis": "^5.5.6",
     "reflect-metadata": "^0.2.2",
     "typescript": "^5.8.3"
   },
   "devDependencies": {
+    "@types/connect-redis": "^0.0.23",
+    "@types/cookie-parser": "^1.4.9",
+    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
+    "@types/express-session": "^1.18.2",
     "@types/node": "^24.0.4"
   }
 }

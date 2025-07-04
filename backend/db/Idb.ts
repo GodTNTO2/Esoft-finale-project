@@ -11,7 +11,7 @@ export interface UserTable {
     updated_at: ColumnType<Date, string | undefined, never>
 }
 
-// 2. Адреса пользователей
+// Адреса пользователей
 export interface UserAddressTable {
     address_id: Generated<number>
     user_id: number
@@ -26,7 +26,7 @@ export interface UserAddressTable {
     updated_at: ColumnType<Date, string | undefined, never>
 }
 
-// 3. Категории товаров
+// Категории товаров
 export interface CategoryTable {
     category_id: Generated<number>
     name: string
@@ -38,7 +38,7 @@ export interface CategoryTable {
     updated_at: ColumnType<Date, string | undefined, never>
 }
 
-// 4. Товары
+// Товары
 export interface ProductTable {
     product_id: Generated<number>
     category_id: number
@@ -52,7 +52,7 @@ export interface ProductTable {
     updated_at: ColumnType<Date, string | undefined, never>
 }
 
-// 5. Изображения товаров
+// Изображения товаров
 export interface ProductImageTable {
     image_id: Generated<number>
     product_id: number
@@ -62,7 +62,7 @@ export interface ProductImageTable {
     created_at: ColumnType<Date, string | undefined, never>
 }
 
-// 7. Корзины
+// Корзины
 export interface CartTable {
     cart_id: Generated<number>
     user_id: number
@@ -70,7 +70,7 @@ export interface CartTable {
     updated_at: ColumnType<Date, string | undefined, never>
 }
 
-// 8. Элементы корзины
+// Элементы корзины
 export interface CartItemTable {
     cart_item_id: Generated<number>
     cart_id: number
@@ -79,7 +79,7 @@ export interface CartItemTable {
     added_at: ColumnType<Date, string | undefined, never>
 }
 
-// 9. Заказы
+// Заказы
 export interface OrderTable {
     order_id: Generated<number>
     user_id: number
@@ -100,7 +100,7 @@ export interface OrderTable {
     updated_at: ColumnType<Date, string | undefined, never>
 }
 
-// 10. Элементы заказа
+// Элементы заказа
 export interface OrderItemTable {
     order_item_id: Generated<number>
     order_id: number
@@ -111,7 +111,7 @@ export interface OrderItemTable {
     special_instructions: string | null
 }
 
-// 14. Магазины
+// Магазины
 export interface ShopTable {
     shop_id: Generated<number>
     name: string
