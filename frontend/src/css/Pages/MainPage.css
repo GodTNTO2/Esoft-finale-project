@@ -1,0 +1,47 @@
+.home-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.products-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.products-header h1 {
+    font-size: 28px;
+    color: #333;
+}
+
+.products-count {
+    font-size: 16px;
+    color: #666;
+}
+
+.products-grid {
+    display: flex;
+    gap: 25px;
+    margin-bottom: 40px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    font-size: 18px;
+    color: #555;
+}
+
+.error-message {
+    color: #d32f2f;
+    text-align: center;
+    padding: 20px;
+    font-size: 18px;
+}

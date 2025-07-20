@@ -1,0 +1,145 @@
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f9fafb;
+    padding: 1rem;
+}
+
+
+.login-form-wrapper {
+    max-width: 28rem;
+    width: 100%;
+    margin: 0 auto;
+}
+
+
+.login-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.login-title {
+    margin-top: 1.5rem;
+    font-size: 1.875rem;
+    font-weight: 800;
+    color: #111827;
+}
+
+
+.login-form {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.input-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border-radius: 0.375rem;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.login-input {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #d1d5db;
+    color: #111827;
+    background-color: white;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.login-input:focus {
+    outline: none;
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+    z-index: 10;
+}
+
+.login-input.first {
+    border-top-left-radius: 0.375rem;
+    border-top-right-radius: 0.375rem;
+}
+
+.login-input.last {
+    border-bottom-left-radius: 0.375rem;
+    border-bottom-right-radius: 0.375rem;
+}
+
+
+.submit-button {
+    position: relative;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: white;
+    background-color: #4f46e5;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.submit-button:hover {
+    background-color: #4338ca;
+}
+
+.submit-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.3);
+}
+
+.submit-button.loading {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+
+.error-message {
+    color: #ef4444;
+    font-size: 0.875rem;
+    text-align: center;
+}
+
+
+.register-link-container {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.register-link-text {
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.register-link {
+    font-weight: 500;
+    color: #4f46e5;
+    transition: color 0.2s;
+}
+
+.register-link:hover {
+    color: #4338ca;
+    text-decoration: none;
+}
+
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
