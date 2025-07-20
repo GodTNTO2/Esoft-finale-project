@@ -13,14 +13,14 @@ import { LoggerService } from '../services/Logger/loggerServices'
 
 interface Database {
   users: UserTable
-  userAddresses: UserAddressTable
+  user_addresses: UserAddressTable
   categories: CategoryTable
   products: ProductTable
-  productImages: ProductImageTable
+  product_images: ProductImageTable
   carts: CartTable
-  cartItems: CartItemTable
+  cart_items: CartItemTable
   orders: OrderTable
-  orderItems: OrderItemTable
+  order_items: OrderItemTable
   shops: ShopTable
 }
 
@@ -67,15 +67,15 @@ export class DataBaseUseCreate{
       const { error, results } = await this.migrator.migrateToLatest();
       
       if (error) {
-        this.logger.error(`Ошибка миграции: ${error}`);
+        this.logger.error(`migration fails: ${error}`);
         throw error;
       }
 
       results?.forEach((it) => {
         if (it.status === 'Success') {
-          this.logger.log(`Миграция "${it.migrationName}" прошла успешно`);
+          this.logger.log(`Migration "${it.migrationName}" Success`);
         } else if (it.status === 'Error') {
-          this.logger.log(`Миграциия фейл "${it.migrationName}"`);
+          this.logger.log(`Migration fail "${it.migrationName}"`);
         }
       });
 

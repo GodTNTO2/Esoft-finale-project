@@ -11,12 +11,13 @@ export class ConfigService  {
     constructor(@inject(TYPES.Logger) private logger: LoggerService) {
 		const result: DotenvConfigOutput = config();
 
+
 		if (result.error) {
-			this.logger.error('Ошибка');
+			this.logger.error('Error env');
             return
         }
 
-        this.logger.log('.env загружен');
+        this.logger.log('.env Success');
         this.config = result.parsed as DotenvParseOutput;
 	}
 

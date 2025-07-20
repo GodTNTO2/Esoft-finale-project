@@ -24,7 +24,7 @@ const HTTP_STATUSES = {
 export abstract class BaseController {
 	private readonly _router: Router;
 
-	constructor(private logger: LoggerService) {
+	constructor(public logger: LoggerService) {
 		this._router = Router();
 	}
 
@@ -32,24 +32,40 @@ export abstract class BaseController {
 		return this._router;
 	}
 
-	public send<T>(res: Response, code: number, message: T): TExpressReturn {
-		res.type('application/json');
-		return res.status(code).json(message);
+	protected ok(res: Response, data?: any) {
+		res.status(200).json(data);
 	}
 
-	public ok<T>(res: Response, message: T): TExpressReturn {
-		return this.send<T>(res, HTTP_STATUSES.OK, message);
+	protected created(res: Response, data?: any) {
+		res.status(201).json(data);
 	}
 
-	public created(res: Response): TExpressReturn {
-		return res.sendStatus(HTTP_STATUSES.OK);
+	protected clientError(res: Response, message?: string) {
+		res.status(400).json({ error: message || 'Bad Request' });
+	}
+
+	protected unauthorized(res: Response, message?: string) {
+		res.status(401).json({ error: message || 'Unauthorized' });
+	}
+
+	protected notFound(res: Response, message?: string) {
+		res.status(404).json({ error: message || 'Not Found' });
+	}
+
+	protected internalError(res: Response, message?: string) {
+		this.logger.error(message);
+		res.status(500).json({ error: message || 'Internal Server Error' });
 	}
 
 	protected bindRoutes(routes: IControllerRoute[]): void {
 		for (const route of routes) {
 			this.logger.log(`[${route.method}] ${route.path}`);
-
-			const middleware = route.middlewares?.map((m) => m.execute.bind(m));
+			const middleware = route.middlewares?.map((m) => {
+				if (!m?.execute) {
+					throw new Error(`Middleware is invalid: no 'execute' method in ${m}`);
+				}
+				return m.execute.bind(m);
+			});
 			const handler = route.func.bind(this);
 			const pipeline = middleware ? [...middleware, handler] : handler;
 

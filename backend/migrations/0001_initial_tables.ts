@@ -2,7 +2,6 @@ import { Kysely, sql } from 'kysely'
 
 
 export async function up(db: Kysely<any>): Promise<void> {
-  // Создаем таблицу пользователей
   await db.schema
     .createTable('users')
     .addColumn('user_id', 'serial', (col) => col.primaryKey())
@@ -19,14 +18,13 @@ export async function up(db: Kysely<any>): Promise<void> {
     )
     .execute()
 
-  // Создаем таблицу адресов пользователей
+
   await db.schema
     .createTable('user_addresses')
     .addColumn('address_id', 'serial', (col) => col.primaryKey())
     .addColumn('user_id', 'integer', (col) =>
       col.references('users.user_id').onDelete('cascade').notNull()
     )
-    .addColumn('city', 'varchar(100)', (col) => col.notNull())
     .addColumn('street', 'varchar(255)', (col) => col.notNull())
     .addColumn('house_number', 'varchar(20)', (col) => col.notNull())
     .addColumn('apartment_number', 'varchar(20)', (col) => col.notNull())
@@ -38,13 +36,12 @@ export async function up(db: Kysely<any>): Promise<void> {
     )
     .execute()
 
-  // Создаем таблицу категорий
+
   await db.schema
     .createTable('categories')
     .addColumn('category_id', 'serial', (col) => col.primaryKey())
     .addColumn('name', 'varchar(100)', (col) => col.notNull())
     .addColumn('description', 'text')
-    .addColumn('is_active', 'boolean', (col) => col.defaultTo(true))
     .addColumn('image_url', 'varchar(255)')
     .addColumn('created_at', 'timestamptz', (col) =>
       col.defaultTo('now()').notNull()
@@ -54,7 +51,7 @@ export async function up(db: Kysely<any>): Promise<void> {
     )
     .execute()
 
-  // Создаем таблицу товаров
+
   await db.schema
     .createTable('products')
     .addColumn('product_id', 'serial', (col) => col.primaryKey())
@@ -75,7 +72,7 @@ export async function up(db: Kysely<any>): Promise<void> {
     )
     .execute()
 
-  // Создаем таблицу изображений товаров
+
   await db.schema
     .createTable('product_images')
     .addColumn('image_id', 'serial', (col) => col.primaryKey())
@@ -90,13 +87,14 @@ export async function up(db: Kysely<any>): Promise<void> {
     )
     .execute()
 
-  // Создаем таблицу корзин
+
   await db.schema
     .createTable('carts')
     .addColumn('cart_id', 'serial', (col) => col.primaryKey())
     .addColumn('user_id', 'integer', (col) =>
-      col.references('users.user_id').onDelete('cascade').notNull()
+      col.references('users.user_id').onDelete('cascade')
     )
+    .addColumn('alt_user_id', 'varchar(255)')
     .addColumn('created_at', 'timestamptz', (col) =>
       col.defaultTo('now()').notNull()
     )
@@ -105,7 +103,7 @@ export async function up(db: Kysely<any>): Promise<void> {
     )
     .execute()
 
-  // Создаем таблицу элементов корзины
+
   await db.schema
     .createTable('cart_items')
     .addColumn('cart_item_id', 'serial', (col) => col.primaryKey())
@@ -121,12 +119,11 @@ export async function up(db: Kysely<any>): Promise<void> {
     )
     .execute()
 
-  // Создаем таблицу магазинов
+
   await db.schema
     .createTable('shops')
     .addColumn('shop_id', 'serial', (col) => col.primaryKey())
     .addColumn('name', 'varchar(255)', (col) => col.notNull())
-    .addColumn('city', 'varchar(100)', (col) => col.notNull())
     .addColumn('street', 'varchar(255)', (col) => col.notNull())
     .addColumn('house_number', 'varchar(20)', (col) => col.notNull())
     .addColumn('phone', 'varchar(20)', (col) => col.notNull())
@@ -139,7 +136,7 @@ export async function up(db: Kysely<any>): Promise<void> {
     )
     .execute()
 
-  // Создаем таблицу заказов
+
   await db.schema
     .createTable('orders')
     .addColumn('order_id', 'serial', (col) => col.primaryKey())
@@ -153,16 +150,17 @@ export async function up(db: Kysely<any>): Promise<void> {
       col.defaultTo('now()').notNull()
     )
     .addColumn('status', 'varchar(50)', (col) =>
-      col.notNull().defaultTo('pending')
+      col.notNull().defaultTo('processing')
     )
     .addColumn('total_amount', sql`numeric(10,2)`, (col) => col.notNull())
-    .addColumn('payment_method', 'varchar(50)', (col) => col.notNull())
     .addColumn('payment_status', 'varchar(50)', (col) =>
       col.notNull().defaultTo('pending')
     )
-    .addColumn('address_id', 'integer', (col) =>
-      col.references('user_addresses.address_id').notNull()
-    )
+    .addColumn('street', 'varchar(255)', (col) => col.notNull())
+    .addColumn('house_number', 'varchar(20)', (col) => col.notNull())
+    .addColumn('apartment_number', 'varchar(20)', (col) => col.notNull())
+    .addColumn('entrance', 'varchar(20)')
+    .addColumn('floor', 'varchar(20)')
     .addColumn('recipient_name', 'varchar(255)', (col) => col.notNull())
     .addColumn('recipient_phone', 'varchar(20)', (col) => col.notNull())
     .addColumn('delivery_date', 'date', (col) => col.notNull())
@@ -177,7 +175,7 @@ export async function up(db: Kysely<any>): Promise<void> {
     )
     .execute()
 
-  // Создаем таблицу элементов заказа
+
   await db.schema
     .createTable('order_items')
     .addColumn('order_item_id', 'serial', (col) => col.primaryKey())
@@ -195,7 +193,7 @@ export async function up(db: Kysely<any>): Promise<void> {
     .addColumn('special_instructions', 'text')
     .execute()
 
-  // Создаем индексы
+
   await db.schema
     .createIndex('idx_users_email')
     .on('users')

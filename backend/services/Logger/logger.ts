@@ -7,7 +7,7 @@ const logger = pino({
 		target: 'pino-pretty'
 	},
 })
-logger.info('Салам алейкум')
+logger.info('Staert loger')
 
 @injectable()
 export class PinoService implements ILogger {
